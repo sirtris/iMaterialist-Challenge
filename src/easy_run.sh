@@ -29,6 +29,6 @@ gcloud ml-engine jobs submit training $JOB_NAME \
   --module-name trainer.train \
   --package-path ./trainer \
   --region "$REGION" \
-  --config=trainer/config.yaml \
+  --config trainer/config.yaml \
   -- \
-  --train-file "gs://mlip-team-valenteam-mlengine/data/feats.npy"
+  --train-file "gs://mlip-team-valenteam-mlengine"
