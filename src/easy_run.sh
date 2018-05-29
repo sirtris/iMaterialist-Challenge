@@ -24,11 +24,11 @@ export JOB_DIR=gs://$BUCKET_NAME/$JOB_NAME
 export REGION=europe-west1
 
 gcloud ml-engine jobs submit training $JOB_NAME \
-  --job-dir "$BUCKET_NAME" \
-  --runtime-version 1.0 \
-  --module-name trainer.train.py \
+  --job-dir "$BUCKET_NAME/$JOB_NAME" \
+  --runtime-version 1.4 \
+  --module-name trainer.train \
   --package-path ./trainer \
-  --region $REGION \
+  --region "$REGION" \
   --config=trainer/config.yaml \
   -- \
-  --train-file gs://mlip-team-valenteam-mlengine/data/feats.npy
+  --train-file "gs://mlip-team-valenteam-mlengine/data/feats.npy"
