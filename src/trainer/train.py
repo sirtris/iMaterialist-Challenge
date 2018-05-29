@@ -11,7 +11,7 @@ from keras.layers import Dense, Embedding, LSTM, GlobalAveragePooling2D
 from sklearn.model_selection import train_test_split
 from keras.preprocessing import sequence
 from keras.preprocessing.image import img_to_array, ImageDataGenerator
-from keras.applications.inception_v3 import preprocess_input, decode_predictions, InceptionV3
+from keras.applications.xception import preprocess_input, decode_predictions, Xception
 from keras.optimizers import Adam
 import sklearn
 import argparse
@@ -116,7 +116,7 @@ def create_model(num_classes):
     # model.add(MaxPooling2D(pool_size=(2, 2)))
     # model.add(Dropout(0.25))
 
-    base_model = InceptionV3(weights = 'imagenet',include_top=False)
+    base_model = Xception(weights = 'imagenet',include_top=False)
     x = base_model.output
     x = GlobalAveragePooling2D()(x)
     x = Dense(512,activation='relu')(x)
@@ -171,11 +171,11 @@ def main(train_file, test_file, job_dir):
     # TODO: Kaggle competitions accept different submission formats, so saving the predictions is up to you
 
     # Save model weights
-    model.save('model.h5')
+    model.save('model_Xception.h5')
 
     # Save model on google storage
-    with file_io.FileIO('model.h5', mode='r') as input_f:
-        with file_io.FileIO(job_dir + '/model.h5', mode='w+') as output_f:
+    with file_io.FileIO('model_Xception.h5', mode='r') as input_f:
+        with file_io.FileIO(job_dir + '/model_Xception.h5', mode='w+') as output_f:
             output_f.write(input_f.read())
 
 
