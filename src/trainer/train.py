@@ -143,7 +143,7 @@ def create_model(num_classes):
     return model
 
 
-def main(train_file, test_file, job_dir):
+def main(train_file, job_dir): # test_file   as second arg
     print('loading model')
     feats,labels = load_data(train_file)
     print('splitting the data')
@@ -192,11 +192,11 @@ if __name__ == '__main__':
       required=True
     )
 
-    parser.add_argument(
-      '--test-file',
-      help='GCS or local paths to test data',
-      required=True
-    )
+    #parser.add_argument(
+    #  '--test-file',
+    #  help='GCS or local paths to test data',
+    #  required=True
+    #)
 
     parser.add_argument(
         '--job-dir',
@@ -207,6 +207,9 @@ if __name__ == '__main__':
     arguments = args.__dict__
     print('args: {}'.format(arguments))
 
-    main(args.train_file, args.test_file, args.job_dir)
+
+
+    #main(args.train_file, args.test_file, args.job_dir)
+    main(**arguments)
 #    main('a','b','c')
 #    feats,labels = load_data('As#')
