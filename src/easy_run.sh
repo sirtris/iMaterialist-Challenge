@@ -19,7 +19,7 @@
 
 #######################################################
 export BUCKET_NAME="gs://mlip-team-valenteam-mlengine"
-export JOB_NAME="Xception$(date +%Y%m%d_%H%M%S)"
+export JOB_NAME="DenseNet121$(date +%Y%m%d_%H%M%S)"
 export JOB_DIR=gs://$BUCKET_NAME/$JOB_NAME
 export REGION=europe-west1
 

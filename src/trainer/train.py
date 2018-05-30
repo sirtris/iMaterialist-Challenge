@@ -11,7 +11,7 @@ from keras.layers import Dense, Embedding, LSTM, GlobalAveragePooling2D
 from sklearn.model_selection import train_test_split
 from keras.preprocessing import sequence
 from keras.preprocessing.image import img_to_array, ImageDataGenerator
-from keras.applications.xception import preprocess_input, decode_predictions, Xception
+from keras.applications.densenet import preprocess_input, decode_predictions, DenseNet121
 from keras.optimizers import Adam
 import sklearn
 import argparse
@@ -116,7 +116,7 @@ def create_model(num_classes):
     # model.add(MaxPooling2D(pool_size=(2, 2)))
     # model.add(Dropout(0.25))
 
-    base_model = Xception(weights = 'imagenet',include_top=False)
+    base_model = DenseNet121(weights = 'imagenet',include_top=False, input_shape=(299, 299, 3), classes=num_classes)
     x = base_model.output
     x = GlobalAveragePooling2D()(x)
     x = Dense(512,activation='relu')(x)
@@ -151,13 +151,14 @@ def main(train_file, job_dir): # test_file   as second arg
     print('creating model')
     model = create_model(len(labels[0]))
     print('augmenting images')
-    aug = ImageDataGenerator(rotation_range=25, width_shift_range=0.1,
-            height_shift_range=0.1, shear_range=0.2, zoom_range=0.2,
-            horizontal_flip=True, fill_mode="nearest")
+    #aug = ImageDataGenerator(rotation_range=25, width_shift_range=0.1,
+    #       height_shift_range=0.1, shear_range=0.2, zoom_range=0.2,
+    #      horizontal_flip=True, fill_mode="nearest")
     print('fitting model')
 #    H = model.fit_generator(aug.flow(X_train, y_train, batch_size=500), validation_data=(X_validation,y_validation),
 #            steps_per_epoch=len(X_train)/500,epochs=5,verbose=1)
-    model.fit(X_train, y_train, nb_epoch=20, batch_size=50, verbose=1)
+    model.fit(X_train, y_train, nb_epoch=20, batch_size=32, verbose=1)
+    #model.fit_generator((X_train, y_train), epochs=5, batch_size=32, verbose=1)
 
     score, accuracy = model.evaluate(X_validation, y_validation)
     print('Test score:', score)
@@ -171,11 +172,11 @@ def main(train_file, job_dir): # test_file   as second arg
     # TODO: Kaggle competitions accept different submission formats, so saving the predictions is up to you
 
     # Save model weights
-    model.save('model_Xception.h5')
+    model.save('model_DenseNet121.h5')
 
     # Save model on google storage
-    with file_io.FileIO('model_Xception.h5', mode='r') as input_f:
-        with file_io.FileIO(job_dir + '/model_Xception.h5', mode='w+') as output_f:
+    with file_io.FileIO('model_DenseNet121.h5', mode='r') as input_f:
+        with file_io.FileIO(job_dir + '/model_DenseNet121.h5', mode='w+') as output_f:
             output_f.write(input_f.read())
 
 
