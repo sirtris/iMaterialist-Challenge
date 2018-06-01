@@ -36,9 +36,14 @@ bucket = client.get_bucket('mlip-team-valenteam-mlengine')
 """
 CONFIG
 """
-BATCH_SIZE = 5
-STEPS_PER_EPOCH = 3
-EPOCHS = 2
+BATCH_SIZE = 64
+#SUBSET = None
+SUBSET = 100000
+if not SUBSET == None:
+    STEPS_PER_EPOCH = SUBSET / BATCH_SIZE
+else:
+    STEPS_PER_EPOCH = 1014544 / BATCH_SIZE
+EPOCHS = 10
 random.seed(42)
 
 def prepare_input_data(batch_addresses):
@@ -230,7 +235,7 @@ def main(job_dir):
     #Using unpreprocessed files online:
 
     print('importing data')
-    train_blobs = list(bucket.list_blobs(max_results=20,prefix='data/train'))
+    train_blobs = list(bucket.list_blobs(max_results=100000,prefix='data/train'))
 #    train_blobs = list(bucket.list_blobs(prefix='data/train'))
     print('shuffling data')
     random.shuffle(train_blobs)
