@@ -1,5 +1,4 @@
 trainingInput:
   scaleTier: CUSTOM
-  masterType: standard_gpu
-  workerType: standard_gpu
-  parameterServerType: standard_gpu
+  masterType: large_model
+  runtimeVersion: "1.4"
