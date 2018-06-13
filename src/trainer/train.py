@@ -192,7 +192,7 @@ def create_model(num_classes):
     x = base_model.output
     x = GlobalAveragePooling2D()(x)
     x = Dense(512,activation='relu')(x)
-    x = Dense(512,activation='relu')(x)    ### If you want a second layer
+    # x = Dense(512,activation='relu')(x)    ### If you want a second layer
     predictions = Dense(num_classes,activation='sigmoid')(x)
 
     model = Model(input=base_model.input,output=predictions)
