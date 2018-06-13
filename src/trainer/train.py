@@ -244,6 +244,7 @@ def main(job_dir):
     ###For testing, you can subset the train data:
     print('subsetting data')
 #    train_blobs = train_blobs[0:20]
+    print("deviceCheck 1")
     print(device_lib.list_local_devices())
 
 
@@ -261,6 +262,9 @@ def main(job_dir):
             labels.append(label)
             names.append(name)
         print('fitting model')
+
+        print("deviceCheck 2 (before model.fit_generator):")
+        print(device_lib.list_local_devices())
 
         model.fit_generator(train_data_generator(names,labels,BATCH_SIZE),steps_per_epoch=STEPS_PER_EPOCH,epochs=EPOCHS)
 
