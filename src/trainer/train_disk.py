@@ -87,7 +87,7 @@ def train_data_generator(data_path,batch_size):
 #                print(imagePath)
 #                print(type(img))
                 # dubble-check if image is read correctly
-                if not img == None:     # was type(img)
+                if not type(img) == None:     # was type(img)
                     img = cv2.resize(img, (299,299),interpolation=cv2.INTER_CUBIC)
                     img = img_to_array(img)
 
