@@ -79,12 +79,13 @@ def train_data_generator(data_path,batch_size):
 
             for imagePath in imagePaths[batch_start:limit]:
                 file_path=os.path.join(data_path,imagePath)
-                if not os.path.isfile(file_path):
+                if not file_path.is_file():  #os.path.isfile(file_path):
                     continue
                 img = cv2.imread(file_path)
 #                print(imagePath)
 #                print(type(img))
-                if not type(img) == None:
+                # dubble-check if image is read correctly 
+                if not img == None:     # was type(img)
                     img = cv2.resize(img, (299,299),interpolation=cv2.INTER_CUBIC)
                     img = img_to_array(img)
 
