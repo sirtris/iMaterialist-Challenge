@@ -80,8 +80,8 @@ def train_data_generator(data_path,batch_size):
 
             for imagePath in imagePaths[batch_start:limit]:
                 file_path=os.path.join(data_path,imagePath)
-                file_path = Path(file_path)
-                if not file_path.is_file():  #os.path.isfile(file_path):
+                file_path_ = Path(file_path)
+                if not file_path_.is_file():  #os.path.isfile(file_path):
                     continue
                 img = cv2.imread(file_path)
 #                print(imagePath)
