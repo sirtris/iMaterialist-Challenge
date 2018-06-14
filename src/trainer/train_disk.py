@@ -124,9 +124,11 @@ def create_model(num_classes):
 
     base_model = InceptionV3(weights = 'imagenet',include_top=False)
     x = base_model.output
-    x = GlobalAveragePooling2D()(x)
-    x = Dense(512,activation='relu')(x)
-    x = Dense(512,activation='relu')(x)    ### If you want a second layer
+    x = GlobalMaxPooling2D()(x)
+    x = Dense(2048,activation='relu')(x)
+    x = Dropout(rate=0.5)(x)
+    x = Dense(2048,activation='relu')(x)
+    x = Dropout(rate=0.5)(x)
     predictions = Dense(num_classes,activation='sigmoid')(x)
 
     model = Model(input=base_model.input,output=predictions)
