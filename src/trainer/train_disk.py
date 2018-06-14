@@ -150,14 +150,14 @@ def main():
 
         print('fitting model')
 
-        model.fit_generator(train_data_generator('~/home/valenteam/iMaterialist/iMaterialist-Challenge/data',BATCH_SIZE),steps_per_epoch=STEPS_PER_EPOCH,epochs=EPOCHS)
+        model.fit_generator(train_data_generator('/home/valenteam/iMaterialist/iMaterialist-Challenge/data/',BATCH_SIZE),steps_per_epoch=STEPS_PER_EPOCH,epochs=EPOCHS)
 
 
 
 
     # Save model weights
     print('saving model')
-    model.save('~/home/valenteam/iMaterialist/iMaterialist-Challenge/src/export/Xception.h5')
+    model.save('/home/valenteam/iMaterialist/iMaterialist-Challenge/src/export/Xception.h5')
 
     # Save model on google storage
 #    with file_io.FileIO('model_InceptionV3_100000.h5', mode='r') as input_f:
