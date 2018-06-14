@@ -19,6 +19,7 @@ import random
 import cv2
 import os
 #import path
+from pathlib import Path
 
 import json
 from tensorflow.python.lib.io import file_io
@@ -79,12 +80,13 @@ def train_data_generator(data_path,batch_size):
 
             for imagePath in imagePaths[batch_start:limit]:
                 file_path=os.path.join(data_path,imagePath)
+                file_path = Path(file_path)
                 if not file_path.is_file():  #os.path.isfile(file_path):
                     continue
                 img = cv2.imread(file_path)
 #                print(imagePath)
 #                print(type(img))
-                # dubble-check if image is read correctly 
+                # dubble-check if image is read correctly
                 if not img == None:     # was type(img)
                     img = cv2.resize(img, (299,299),interpolation=cv2.INTER_CUBIC)
                     img = img_to_array(img)
