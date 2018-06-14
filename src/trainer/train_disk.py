@@ -18,7 +18,7 @@ import argparse
 import random
 import cv2
 import os
-import path
+#import path
 
 import json
 from tensorflow.python.lib.io import file_io
