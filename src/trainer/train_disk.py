@@ -11,7 +11,7 @@ from keras.layers import Dense, Embedding, LSTM, GlobalAveragePooling2D
 from sklearn.model_selection import train_test_split
 from keras.preprocessing import sequence
 from keras.preprocessing.image import img_to_array, ImageDataGenerator
-from keras.applications.xception import preprocess_input, decode_predictions, Xception
+from keras.applications.inception_v3 import preprocess_input, decode_predictions, InceptionV3
 from keras.optimizers import Adam
 import sklearn
 import argparse
@@ -122,7 +122,7 @@ def create_model(num_classes):
     """
 
 
-    base_model = Xception(weights = 'imagenet',include_top=False)
+    base_model = InceptionV3(weights = 'imagenet',include_top=False)
     x = base_model.output
     x = GlobalAveragePooling2D()(x)
     x = Dense(512,activation='relu')(x)
@@ -160,7 +160,7 @@ def main():
 
     # Save model weights
     print('saving model')
-    model.save('/home/valenteam/iMaterialist/iMaterialist-Challenge/src/export/Xception.h5')
+    model.save('/home/valenteam/iMaterialist/iMaterialist-Challenge/src/export/Inception.h5')
 
     # Save model on google storage
 #    with file_io.FileIO('model_InceptionV3_100000.h5', mode='r') as input_f:
