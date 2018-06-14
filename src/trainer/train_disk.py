@@ -5,16 +5,16 @@
 
 from __future__ import absolute_import
 import numpy as np
-import pandas as pd
+#import pandas as pd
 from keras.models import Sequential, Model
 from keras.layers import Dense, Embedding, LSTM, GlobalAveragePooling2D
-from sklearn.model_selection import train_test_split
-from keras.preprocessing import sequence
+#from sklearn.model_selection import train_test_split
+#from keras.preprocessing import sequence
 from keras.preprocessing.image import img_to_array, ImageDataGenerator
 from keras.applications.inception_v3 import preprocess_input, decode_predictions, InceptionV3
 from keras.optimizers import Adam
-import sklearn
-import argparse
+#import sklearn
+#import argparse
 import random
 import cv2
 import os
@@ -22,10 +22,10 @@ import os
 from pathlib import Path
 
 import json
-from tensorflow.python.lib.io import file_io
-from PIL import Image
+#from tensorflow.python.lib.io import file_io
+#from PIL import Image
 import io
-from google.cloud import storage
+#from google.cloud import storage
 from sklearn.preprocessing import MultiLabelBinarizer
 import ast
 import keras.backend as K
